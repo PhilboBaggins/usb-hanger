@@ -135,6 +135,11 @@ module UsbHangerAssembly3D(
     rotate([180 - 45, 0, 0])
     translate([0, size[1] / 2])
     #UsbHangerPanel3D(size, numConnGroups, connPerGroup, supportWidth);
+
+    // Wall
+    color("yellow")
+    translate([-100, 0, -100])
+    cube([size[0] + 200, 20, 300]);
 }
 
 //UsbHangerPanel2D();
