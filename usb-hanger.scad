@@ -26,16 +26,27 @@ module UsbHangerPanel2D(
         // Main panel body
         square([size[0], size[1]]);
 
-        // Holes for panel mount USB connectors
         for (x1 = [0 : numConnGroups - 1])
         for (x2 = [1 : connPerGroup])
         {
+            // Holes for panel mount USB connectors
             xPos = supportWidth
                 + x1 * xPerGroup
                 + x2 * xUsbSpacing;
-
             translate([xPos, yPos])
             PanelMountSingleUsbCutout(showBodyPreview = showBodyPreview);
+
+            // Notches for loop cables back over the top of the panel
+            cableNotchSize = 7;
+            if (x2 != connPerGroup)
+            {
+                xPos = supportWidth
+                    + x1 * xPerGroup
+                    + (x2 + 0.5) * xUsbSpacing
+                    - cableNotchSize / 2;
+                translate([xPos, size[1] - cableNotchSize])
+                square([cableNotchSize, cableNotchSize]);
+            }
         }
 
         // Notches for holders
